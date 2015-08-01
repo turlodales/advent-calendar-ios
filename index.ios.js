@@ -1,52 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
-var React = require('react-native');
-var {
+let React = require('react-native');
+let Constants = require('./src/Constants');
+let Calendar = require('./src/Calendar');
+
+let {
   AppRegistry,
+  NavigatorIOS,
   StyleSheet,
-  Text,
-  View,
+  StatusBarIOS,
 } = React;
 
-var AdventCalendar = React.createClass({
-  render: function() {
+class AdventCalendar extends React.Component {
+  componentWillMount() {
+    StatusBarIOS.setStyle('light-content');
+  }
+
+  render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <NavigatorIOS
+      style={styles.container}
+      initialRoute={{
+        component: Calendar,
+        title: 'Welcome',
+        backButtonTitle: 'Back',
+      }}
+      barTintColor={Constants.backgroundColor}
+      tintColor={Constants.textColor}
+      titleTextColor={Constants.textColor}
+      />
     );
   }
-});
+}
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    flex: 1
   },
 });
 
