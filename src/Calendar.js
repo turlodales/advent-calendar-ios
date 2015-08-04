@@ -1,8 +1,11 @@
 'use strict';
 
 let React = require('react-native');
+let Dimensions = require('Dimensions');
 let Constants = require('./Constants');
+let CalendarItem = require('./CalendarItem');
 
+let DimensionWidth = Dimensions.get('window').width;
 let {
   StyleSheet,
   Text,
@@ -10,9 +13,19 @@ let {
 } = React;
 
 class Calendar extends React.Component {
+  renderItem(value) {
+    return <CalendarItem width={width} index={value} />;
+  }
+
   render() {
+    let list = [0, 1, 2, 3, 4, 5, 6];
+    let size = DimensionWidth / 3;
+
     return (
       <View style={styles.container}>
+        {list.map(function(value) {
+          return <CalendarItem size={size} index={value} key={value} />
+        })}
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -31,8 +44,8 @@ class Calendar extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     backgroundColor: Constants.backgroundColor,
   },
   welcome: {
